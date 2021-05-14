@@ -6,11 +6,11 @@ import App from "./App";
 
 ReactDOM.render(
   <StrictMode>
-    <ProductsProvider>
-      <Router>
+    <Router>
+      <ProductsProvider>
         <App />
-      </Router>
-    </ProductsProvider>
+      </ProductsProvider>
+    </Router>
   </StrictMode>,
   document.getElementById("root")
 );
