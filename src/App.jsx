@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/index";
 import { Products } from "./pages/index";
+import "./App.css";
 
 export default function App() {
   return (
