@@ -2,22 +2,22 @@ import { createContext, useReducer, useContext } from "react";
 
 const ProductsContext = createContext();
 
-function productsReducer(products, { type, payload: { productList } }) {
-  switch (type) {
-    case "INIT_PRODUCTS":
-      return productList;
+export function ProductsProvider({ children }) {
+  function productsReducer(products, { type, payload: { productList } }) {
+    switch (type) {
+      case "INIT_PRODUCTS":
+        return productList;
 
-    // case "DECREMENT_STOCK":
-    // /**
-    //  * payload should have product id
-    //  */
+      // case "DECREMENT_STOCK":
+      // /**
+      //  * payload should have product id
+      //  */
 
-    default:
-      return products;
+      default:
+        return products;
+    }
   }
-}
 
-export default function ProductsProvider({ children }) {
   const [products, dispatchProducts] = useReducer(productsReducer, []);
 
   return (
