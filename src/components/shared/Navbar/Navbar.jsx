@@ -33,12 +33,12 @@ export default function Navbar() {
           </li>
           <li className="nav__item">
             <Link className="link" to="/wishlist">
-              <i class="fas fa--sm fa-heart"></i>
+              <i className="fas fa--sm fa-heart"></i>
             </Link>
           </li>
           <li className="nav__item">
             <Link className="link" to="/login">
-              <i class="far fa--sm fa-user-circle"></i>
+              <i className="far fa--sm fa-user-circle"></i>
             </Link>
           </li>
         </ul>
