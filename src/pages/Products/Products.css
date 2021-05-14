@@ -1,0 +1,17 @@
+.Products {
+    display: grid;
+    grid-template-columns: 400px minmax(1024px, 75%) 0.4fr;
+    /* gap: 0.5rem; */
+    height: 100%;
+}
+
+
+/* .products__filter {
+    grid-column: 1/2;
+} */
+
+.products__list {
+    grid-column: 2/3;
+    display: flex;
+    flex-flow: row wrap;
+}
