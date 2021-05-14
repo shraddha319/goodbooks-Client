@@ -1,12 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/index";
+import { Products } from "./pages/index";
 
 export default function App() {
   return (
     <div className="App">
       <Navbar />
       <div className="Main">
-        <Routes></Routes>
+        <Routes>
+          <Route path="/products" element={<Products />} />
+        </Routes>
       </div>
     </div>
   );
