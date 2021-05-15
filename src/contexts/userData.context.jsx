@@ -3,7 +3,7 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 const UserContext = createContext();
 
 export function UserDataProvider({ children }) {
-  const initialUserData = {
+  const initialUserData = JSON.parse(localStorage.getItem("userData")) || {
     cart: {
       _id: null,
       cartItems: [],
@@ -15,7 +15,10 @@ export function UserDataProvider({ children }) {
     initialUserData
   );
 
-  useEffect(() => console.log(userData), userData);
+  useEffect(() => {
+    console.log(userData);
+    localStorage.setItem("userData", JSON.stringify(userData));
+  }, [userData]);
 
   function userDataReducer(userData, { type, payload }) {
     switch (type) {
