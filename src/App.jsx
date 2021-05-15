@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "./components/index";
-import { Products } from "./pages/index";
+import { Products, Cart } from "./pages/index";
 import "./App.css";
 
 export default function App() {
@@ -10,6 +10,7 @@ export default function App() {
       <div className="Main">
         <Routes>
           <Route path="/products" element={<Products />} />
+          <Routes path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </div>

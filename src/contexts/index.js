@@ -3,7 +3,14 @@ import {
     ProductsProvider
 } from "./Products.context";
 
+import {
+    useUserData,
+    UserDataProvider
+} from "./userData.context"
+
 export {
     useProducts,
-    ProductsProvider
+    ProductsProvider,
+    useUserData,
+    UserDataProvider
 }
