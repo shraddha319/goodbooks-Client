@@ -1,6 +1,7 @@
 import "./ProductCard.css";
+import { addToCart } from "../../api/index";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, userData, dispatchUserData }) {
   return (
     <div className="card card--product clickable hover--scale-out">
       <button className="btn btn--icon">
@@ -19,7 +20,10 @@ export default function ProductCard({ product }) {
         <ProductPrice price={product.price} />
       </div>
       <div className="card__footer">
-        <button className="btn btn--icon">
+        <button
+          onClick={() => addToCart(product._id, userData, dispatchUserData)}
+          className="btn btn--icon"
+        >
           <span className="fa--sm">
             <i className="fas fa-shopping-cart"></i>
           </span>
