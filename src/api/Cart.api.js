@@ -14,7 +14,7 @@ export async function addToCart(productId, userData, dispatchUserData) {
         } = await axios.post(endPointURI, {
             productId
         });
-        if (status != 201) throw Error("Post request failed");
+        if (status !== 201) throw Error("Post request failed");
         dispatchUserData({
             type: "ADD_TO_CART",
             payload: {
