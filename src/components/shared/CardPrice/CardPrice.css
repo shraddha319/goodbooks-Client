@@ -1,0 +1,7 @@
+.card__price {
+    align-items: center;
+}
+
+.card__price>* {
+    margin-right: 0.6rem;
+}
