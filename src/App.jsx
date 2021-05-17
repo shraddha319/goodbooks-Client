@@ -10,7 +10,7 @@ export default function App() {
       <div className="Main">
         <Routes>
           <Route path="/products" element={<Products />} />
-          <Routes path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </div>
