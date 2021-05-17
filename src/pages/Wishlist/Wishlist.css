@@ -1,0 +1,34 @@
+.Wishlist {
+    grid-column: 2/3;
+}
+
+.card--wishlist {
+    height: 300px;
+    width: 500px;
+    grid-template-columns: 37% 63%;
+    grid-template-rows: 80% 20%;
+    box-shadow: none;
+    border: 1px solid var(--clr-gray-light);
+    overflow: hidden
+}
+
+.card--wishlist.card--horizontal {
+    grid-template-areas:
+        "media body"
+        "media footer";
+}
+
+.card--wishlist .card__media--image {
+    height: 100%;
+    object-fit: cover;
+}
+
+.card--wishlist .card__body {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+.card__footer {
+    align-items: center;
+}
