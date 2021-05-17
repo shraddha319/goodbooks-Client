@@ -1,10 +1,13 @@
 import "./ProductCard.css";
-import { addToCart } from "../../api/index";
+import { addToCart, addToWishlist } from "../../api/index";
 
 export default function ProductCard({ product, userData, dispatchUserData }) {
   return (
     <div className="card card--product clickable hover--scale-out">
-      <button className="btn btn--icon">
+      <button
+        className="btn btn--icon"
+        onClick={() => addToWishlist(product._id, userData, dispatchUserData)}
+      >
         <span className="fa--sm fa--hover fa--primary">
           <i className="far fa-heart"></i>
         </span>

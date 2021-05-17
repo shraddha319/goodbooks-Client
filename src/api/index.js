@@ -6,7 +6,12 @@ import {
     addToCart
 } from "./Cart.api";
 
+import {
+    addToWishlist
+} from "./Wishlist.api";
+
 export {
     getProducts,
-    addToCart
+    addToCart,
+    addToWishlist
 };

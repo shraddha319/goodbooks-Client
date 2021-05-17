@@ -8,6 +8,10 @@ export function UserDataProvider({ children }) {
       _id: null,
       cartItems: [],
     },
+    wishlist: {
+      _id: null,
+      wishlistItems: [],
+    },
   };
 
   const [userData, dispatchUserData] = useReducer(
@@ -26,6 +30,12 @@ export function UserDataProvider({ children }) {
         return {
           ...userData,
           cart: { ...userData.cart, ...payload.cart },
+        };
+
+      case "ADD_TO_WISHLIST":
+        return {
+          ...userData,
+          wishlist: { ...userData.wishlist, ...payload.wishlist },
         };
 
       default:
