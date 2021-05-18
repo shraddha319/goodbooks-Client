@@ -1,10 +1,10 @@
-.Cart {
+.cart__list {
     grid-column: 2/3;
 }
 
 .card--cart {
     height: 300px;
-    width: 500px;
+    width: 600px;
     grid-template-columns: 37% 63%;
     grid-template-rows: 80% 20%;
     box-shadow: none;
@@ -24,6 +24,7 @@
 }
 
 .card--cart .card__body {
+    padding: 0 0.5rem;
     justify-content: space-between;
     align-items: flex-start;
 }
@@ -31,4 +32,36 @@
 
 .card__footer {
     align-items: center;
+}
+
+/* pricing section*/
+
+
+.cart__pricing .card__header {
+    padding: 0.5em;
+    border-bottom: 1px solid var(--clr-gray-light);
+}
+
+.cart__pricing {
+    padding: 0.2rem;
+    height: 400px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    grid-column: 3/4;
+    min-height: 400px;
+    box-shadow: none;
+    border: 1px solid var(--clr-gray-light);
+}
+
+.cart__pricing .price__item {
+    width: 100%;
+}
+
+.cart__pricing .price__item--total {
+    border: 1px solid var(--clr-gray-light);
+    border-width: 1px 0 1px;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    font-weight: 600;
 }

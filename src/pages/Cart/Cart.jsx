@@ -1,17 +1,17 @@
 import "./Cart.css";
 import { useUserData } from "../../contexts/index";
-import { EmptyCart } from "../Error/Error";
+import { EmptyCart } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
 
 export default function Cart() {
   const { userData } = useUserData();
   console.log(userData);
-  return (
-    <div className="Cart">
-      {!userData.cart._id ? (
-        <EmptyCart />
-      ) : (
-        userData.cart.cartItems.map(({ product, quantity }) => (
+  return !userData.cart._id ? (
+    <EmptyCart />
+  ) : (
+    <div className="Cart page-layout">
+      <div className="cart__list">
+        {userData.cart.cartItems.map(({ product, quantity }) => (
           <div key={product._id} className="card card--horizontal card--cart">
             <div className="card__media">
               <img
@@ -27,29 +27,57 @@ export default function Cart() {
               <CardRating rating={product.rating} />
               <CardPrice price={product.price} />
             </div>
-            <div class="card__footer flex--row">
-              <button class="btn btn--icon">
-                <span className="fa--xs">
-                  <i class="fas fa-trash"></i>
+            <div className="card__footer flex--row">
+              <button className="btn btn--icon">
+                <span className="fa--sm">
+                  <i className="fas fa-trash"></i>
                 </span>
               </button>
               <div className="cart__quantity">
-                <button class="btn btn--icon" disabled={product.quantity <= 0}>
-                  <span className="fa--xs">
-                    <i class="fas fa-minus-circle"></i>
+                <button className="btn btn--icon" disabled={quantity <= 0}>
+                  <span className="fa--sm">
+                    <i className="fas fa-minus-circle"></i>
                   </span>
                 </button>
                 <span className="text--sm">{quantity}</span>
-                <button class="btn btn--icon">
-                  <span className="fa--xs">
-                    <i class="fas fa-plus-circle"></i>
+                <button className="btn btn--icon">
+                  <span className="fa--sm">
+                    <i className="fas fa-plus-circle"></i>
                   </span>
                 </button>
               </div>
             </div>
           </div>
-        ))
-      )}
+        ))}
+      </div>
+      <div class="card cart__pricing">
+        <div class="card__header">
+          <h2 class="title--xs title">PRICE DETAILS</h2>
+        </div>
+        <div class="card__body">
+          <div className="price__item text--sm text justify-between">
+            <p>Price (x items)</p>
+            <p>₹ 123</p>
+          </div>
+          <div className="price__item text--sm text justify-between">
+            <p>Discount</p>
+            <p>₹ 123</p>
+          </div>
+          <div className="price__item text--sm text justify-between">
+            <p>Delivery Charges</p>
+            <p>₹ 123</p>
+          </div>
+        </div>
+        <div class="card__footer">
+          <div className="price__item text--sm price__item--total justify-between">
+            <p>Total Amount</p>
+            <p>₹ 123</p>
+          </div>
+          <p class="text--primary text--xs">
+            <strong>You will save ₹</strong>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
