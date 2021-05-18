@@ -10,10 +10,13 @@ html {
 }
 
 .Main {
-    margin: 80px 1rem 0;
+    margin: 80px 2rem 0;
     height: 100%;
+}
+
+.page-layout {
     display: grid;
-    grid-template-columns: 400px minmax(1024px, 60%) auto;
+    grid-template-columns: 350px minmax(1024px, 50%) auto;
 }
 
 .header {
