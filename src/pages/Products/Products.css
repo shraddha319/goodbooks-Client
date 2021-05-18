@@ -1,7 +1,4 @@
 .Products {
-    display: grid;
-    grid-template-columns: 400px minmax(1024px, 75%) 0.4fr;
-    /* gap: 0.5rem; */
     height: 100%;
 }
 

@@ -13,7 +13,7 @@ export default function Products() {
   useEffect(() => getProducts(dispatchProducts, setEnableLoader), []);
 
   return (
-    <div className="Products">
+    <div className="Products page-layout">
       {enableLoader ? <Loader /> : null}
       <div className="products__list">
         {products.map((product) => (
