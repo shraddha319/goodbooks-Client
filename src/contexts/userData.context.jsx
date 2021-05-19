@@ -32,6 +32,18 @@ export function UserDataProvider({ children }) {
           cart: { ...userData.cart, ...payload.cart },
         };
 
+      case "REMOVE_FROM_CART":
+        let newCartItems = userData.cart.cartItems.filter(
+          (item) => item._id !== payload.cartItemId
+        );
+        return {
+          ...userData,
+          cart: { ...userData.cart, cartItems: newCartItems },
+        };
+
+      case "REMOVE_CART":
+        return { ...userData, cart: { _id: null, cartItems: [] } };
+
       case "ADD_TO_WISHLIST":
         return {
           ...userData,
@@ -39,12 +51,12 @@ export function UserDataProvider({ children }) {
         };
 
       case "REMOVE_FROM_WISHLIST":
-        let newWishlist = userData.wishlist.wishlistItems.filter(
+        let newWishlistItems = userData.wishlist.wishlistItems.filter(
           (item) => item._id !== payload.wishlistItemId
         );
         return {
           ...userData,
-          wishlist: { ...userData.wishlist, wishlistItems: newWishlist },
+          wishlist: { ...userData.wishlist, wishlistItems: newWishlistItems },
         };
 
       case "REMOVE_WISHLIST":

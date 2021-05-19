@@ -1,5 +1,34 @@
 import axios from "axios";
 
+export async function removeFromCart(cartItemId, userData, dispatchUserData) {
+    try {
+        const [endPointURI, type] =
+        userData && userData.cart.cartItems.length === 1 ? [
+            `https://E-Commerce-backend.sshraddha.repl.co/cart/${userData.cart._id}`,
+            "REMOVE_CART",
+        ] : [
+            `https://E-Commerce-backend.sshraddha.repl.co/cart/${userData.cart._id}/${cartItemId}`,
+            "REMOVE_FROM_CART",
+        ];
+        const {
+            status,
+            data: {
+                data
+            },
+        } = await axios.delete(endPointURI);
+        if (status !== 200) throw Error("Delete request failed");
+        dispatchUserData({
+            type,
+            payload: {
+                _id: data._id,
+                cartItemId,
+            },
+        });
+    } catch (error) {
+        console.log("Delete request failed: ", error);
+    }
+}
+
 export async function addToCart(productId, userData, dispatchUserData) {
     try {
         const endPointURI = userData && userData.cart._id ?

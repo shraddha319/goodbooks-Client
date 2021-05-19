@@ -3,7 +3,8 @@ import {
 } from "./Products.api";
 
 import {
-    addToCart
+    addToCart,
+    removeFromCart
 } from "./Cart.api";
 
 import {
@@ -14,6 +15,7 @@ import {
 export {
     getProducts,
     addToCart,
+    removeFromCart,
     addToWishlist,
     removeFromWishlist
 };

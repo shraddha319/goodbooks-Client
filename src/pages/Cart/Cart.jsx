@@ -2,16 +2,16 @@ import "./Cart.css";
 import { useUserData } from "../../contexts/index";
 import { EmptyCart } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
+import { removeFromCart } from "../../api/index";
 
 export default function Cart() {
-  const { userData } = useUserData();
-  console.log(userData);
+  const { userData, dispatchUserData } = useUserData();
   return !userData.cart._id ? (
     <EmptyCart />
   ) : (
     <div className="Cart page-layout">
       <div className="cart__list">
-        {userData.cart.cartItems.map(({ product, quantity }) => (
+        {userData.cart.cartItems.map(({ _id, product, quantity }) => (
           <div key={product._id} className="card card--horizontal card--cart">
             <div className="card__media">
               <img
@@ -28,7 +28,10 @@ export default function Cart() {
               <CardPrice price={product.price} />
             </div>
             <div className="card__footer flex--row">
-              <button className="btn btn--icon">
+              <button
+                onClick={() => removeFromCart(_id, userData, dispatchUserData)}
+                className="btn btn--icon"
+              >
                 <span className="fa--sm">
                   <i className="fas fa-trash"></i>
                 </span>
