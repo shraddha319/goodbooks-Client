@@ -5,12 +5,13 @@ import { CardRating, CardPrice } from "../../components/index";
 
 export default function Wishlist() {
   const { userData } = useUserData();
-  return (
-    <div className="Wishlist">
-      {!userData.wishlist._id ? (
-        <EmptyWishlist />
-      ) : (
-        userData.wishlist.wishlistItems.map(({ product }) => (
+
+  return !userData.wishlist._id ? (
+    <EmptyWishlist />
+  ) : (
+    <div className="Wishlist page-layout">
+      <div className="wishlist__list">
+        {userData.wishlist.wishlistItems.map(({ product }) => (
           <div
             key={product._id}
             className="card card--horizontal card--wishlist"
@@ -42,8 +43,8 @@ export default function Wishlist() {
               </button>
             </div>
           </div>
-        ))
-      )}
+        ))}
+      </div>
     </div>
   );
 }

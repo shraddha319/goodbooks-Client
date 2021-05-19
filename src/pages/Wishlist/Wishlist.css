@@ -1,4 +1,4 @@
-.Wishlist {
+.wishlist__list {
     grid-column: 2/3;
 }
 
@@ -12,23 +12,23 @@
     overflow: hidden
 }
 
-.card--wishlist.card--horizontal {
+.wishlist__list .card--horizontal {
     grid-template-areas:
         "media body"
         "media footer";
 }
 
-.card--wishlist .card__media--image {
+.wishlist__list .card__media--image {
     height: 100%;
     object-fit: cover;
 }
 
-.card--wishlist .card__body {
+.wishlist__list .card__body {
     justify-content: space-between;
     align-items: flex-start;
 }
 
 
-.card__footer {
+.wishlist__list .card__footer {
     align-items: center;
 }
