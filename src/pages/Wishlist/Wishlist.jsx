@@ -2,16 +2,17 @@ import "./Wishlist.css";
 import { useUserData } from "../../contexts/index";
 import { EmptyWishlist } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
+import { removeFromWishlist } from "../../api/index";
 
 export default function Wishlist() {
-  const { userData } = useUserData();
+  const { userData, dispatchUserData } = useUserData();
 
   return !userData.wishlist._id ? (
     <EmptyWishlist />
   ) : (
     <div className="Wishlist page-layout">
       <div className="wishlist__list">
-        {userData.wishlist.wishlistItems.map(({ product }) => (
+        {userData.wishlist.wishlistItems.map(({ _id, product }) => (
           <div
             key={product._id}
             className="card card--horizontal card--wishlist"
@@ -31,7 +32,12 @@ export default function Wishlist() {
               <CardPrice price={product.price} />
             </div>
             <div class="card__footer flex--row">
-              <button class="btn btn--icon">
+              <button
+                onClick={() =>
+                  removeFromWishlist(_id, userData, dispatchUserData)
+                }
+                class="btn btn--icon"
+              >
                 <span className="fa--sm">
                   <i class="fas fa-trash"></i>
                 </span>

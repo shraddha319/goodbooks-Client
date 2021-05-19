@@ -7,11 +7,13 @@ import {
 } from "./Cart.api";
 
 import {
-    addToWishlist
+    addToWishlist,
+    removeFromWishlist
 } from "./Wishlist.api";
 
 export {
     getProducts,
     addToCart,
-    addToWishlist
+    addToWishlist,
+    removeFromWishlist
 };

@@ -38,6 +38,18 @@ export function UserDataProvider({ children }) {
           wishlist: { ...userData.wishlist, ...payload.wishlist },
         };
 
+      case "REMOVE_FROM_WISHLIST":
+        let newWishlist = userData.wishlist.wishlistItems.filter(
+          (item) => item._id !== payload.wishlistItemId
+        );
+        return {
+          ...userData,
+          wishlist: { ...userData.wishlist, wishlistItems: newWishlist },
+        };
+
+      case "REMOVE_WISHLIST":
+        return { ...userData, wishlist: { _id: null, wishlistItems: [] } };
+
       default:
         return userData;
     }
