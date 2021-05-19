@@ -1,5 +1,32 @@
 import axios from "axios";
 
+export async function updateQuantity(updateType, cartItemId, userData, dispatchUserData) {
+    try {
+        const endPointURI = `https://E-Commerce-backend.sshraddha.repl.co/cart/${userData.cart._id}/${cartItemId}`;
+
+        const {
+            status,
+            data: {
+                data
+            }
+        } = await axios.post(endPointURI, {
+            quantityUpdate: updateType
+        });
+        if (status !== 200) throw Error("Quantity update failed");
+        dispatchUserData({
+            type: "UPDATE_QUANTITY",
+            payload: {
+                _id: data._id,
+                cartItemId,
+                updateType
+            }
+        });
+    } catch (error) {
+        console.log("Quantity update request failed: ", error);
+    }
+}
+
+
 export async function removeFromCart(cartItemId, userData, dispatchUserData) {
     try {
         const [endPointURI, type] =

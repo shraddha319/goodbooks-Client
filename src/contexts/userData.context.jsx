@@ -32,6 +32,18 @@ export function UserDataProvider({ children }) {
           cart: { ...userData.cart, ...payload.cart },
         };
 
+      case "UPDATE_QUANTITY":
+        let update = payload.updateType === "INC" ? 1 : -1;
+        let updatedCartItems = userData.cart.cartItems.map((item) =>
+          item._id === payload.cartItemId
+            ? { ...item, quantity: item.quantity + update }
+            : item
+        );
+        return {
+          ...userData,
+          cart: { ...userData.cart, cartItems: updatedCartItems },
+        };
+
       case "REMOVE_FROM_CART":
         let newCartItems = userData.cart.cartItems.filter(
           (item) => item._id !== payload.cartItemId

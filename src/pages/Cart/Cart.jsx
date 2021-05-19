@@ -2,7 +2,7 @@ import "./Cart.css";
 import { useUserData } from "../../contexts/index";
 import { EmptyCart } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
-import { removeFromCart } from "../../api/index";
+import { removeFromCart, updateQuantity } from "../../api/index";
 
 export default function Cart() {
   const { userData, dispatchUserData } = useUserData();
@@ -37,17 +37,32 @@ export default function Cart() {
                 </span>
               </button>
               <div className="cart__quantity">
-                <button className="btn btn--icon" disabled={quantity <= 0}>
-                  <span className="fa--sm">
-                    <i className="fas fa-minus-circle"></i>
-                  </span>
-                </button>
+                {quantity > 1 && (
+                  <button
+                    onClick={() =>
+                      updateQuantity("DEC", _id, userData, dispatchUserData)
+                    }
+                    className="btn btn--icon"
+                    disabled={quantity <= 0}
+                  >
+                    <span className="fa--sm">
+                      <i className="fas fa-minus-circle"></i>
+                    </span>
+                  </button>
+                )}
                 <span className="text--sm">{quantity}</span>
-                <button className="btn btn--icon">
-                  <span className="fa--sm">
-                    <i className="fas fa-plus-circle"></i>
-                  </span>
-                </button>
+                {quantity < product.quantity && (
+                  <button
+                    onClick={() =>
+                      updateQuantity("INC", _id, userData, dispatchUserData)
+                    }
+                    className="btn btn--icon"
+                  >
+                    <span className="fa--sm">
+                      <i className="fas fa-plus-circle"></i>
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
