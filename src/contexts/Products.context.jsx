@@ -57,12 +57,19 @@ export function ProductsProvider({ children }) {
     language: [],
     genre: [],
     rating: [],
-    inStock: false,
+    inStock: true,
   };
 
   const multipleCheckFilters = {
     language: ["English", "Hindi", "Kannada"],
-    genre: ["Fiction", "Non-Fiction", "Classic", "Comic", "Self-Help"],
+    genre: [
+      "Fiction",
+      "Non-Fiction",
+      "Classic",
+      "History",
+      "Comic",
+      "Self-Help",
+    ],
     rating: ["4 ★ & above", "3 ★ & above", "2 ★ & above", "1 ★ & above"],
   };
 
