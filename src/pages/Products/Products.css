@@ -2,10 +2,33 @@
     height: 100%;
 }
 
-
-/* .products__filter {
+.products__filter {
     grid-column: 1/2;
-} */
+    /* position: relative; */
+    /* position: fixed;
+    left: 0; */
+    width: 350px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background: white;
+    border: 1px solid var(--clr-gray-light);
+}
+
+.products__filter .field__label {
+    font-size: 1rem;
+}
+
+.products__filter .field__input {
+    font-size: 0.8rem;
+}
+
+.products__filter .filter__item {
+    margin: 0.5rem 0;
+}
+
+.products__filter .btn--clear-filters {
+    font-size: 0.7rem;
+}
 
 .products__list {
     grid-column: 2/3;
