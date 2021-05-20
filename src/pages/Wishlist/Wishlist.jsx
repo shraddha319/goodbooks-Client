@@ -2,7 +2,7 @@ import "./Wishlist.css";
 import { useUserData } from "../../contexts/index";
 import { EmptyWishlist } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
-import { removeFromWishlist } from "../../api/index";
+import { removeFromWishlist, addToCart } from "../../api/index";
 
 export default function Wishlist() {
   const { userData, dispatchUserData } = useUserData();
@@ -42,7 +42,13 @@ export default function Wishlist() {
                   <i class="fas fa-trash"></i>
                 </span>
               </button>
-              <button class="btn btn--icon">
+              <button
+                onClick={() => {
+                  removeFromWishlist(_id, userData, dispatchUserData);
+                  addToCart(product._id, userData, dispatchUserData);
+                }}
+                class="btn btn--icon"
+              >
                 <span className="fa--sm">
                   <i class="fas fa-cart-plus"></i>
                 </span>
