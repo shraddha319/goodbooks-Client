@@ -20,7 +20,6 @@ export function UserDataProvider({ children }) {
   );
 
   useEffect(() => {
-    console.log(userData);
     localStorage.setItem("userData", JSON.stringify(userData));
   }, [userData]);
 
@@ -79,8 +78,31 @@ export function UserDataProvider({ children }) {
     }
   }
 
+  function isProductInCart(productId) {
+    return userData.cart.cartItems.findIndex(
+      (cartItem) => cartItem.product._id === productId
+    ) === -1
+      ? false
+      : true;
+  }
+
+  function isProductInWishlist(productId) {
+    return userData.wishlist.wishlistItems.findIndex(
+      (wishlistItem) => wishlistItem.product._id === productId
+    ) === -1
+      ? false
+      : true;
+  }
+
   return (
-    <UserContext.Provider value={{ userData, dispatchUserData }}>
+    <UserContext.Provider
+      value={{
+        userData,
+        dispatchUserData,
+        isProductInCart,
+        isProductInWishlist,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
