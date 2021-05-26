@@ -1,11 +1,12 @@
 import "./Wishlist.css";
+import { Link } from "react-router-dom";
 import { useUserData } from "../../contexts/index";
 import { EmptyWishlist } from "../Error/index";
 import { CardRating, CardPrice } from "../../components/index";
 import { removeFromWishlist, addToCart } from "../../api/index";
 
 export default function Wishlist() {
-  const { userData, dispatchUserData } = useUserData();
+  const { userData, dispatchUserData, isProductInCart } = useUserData();
 
   return !userData.wishlist._id ? (
     <EmptyWishlist />
@@ -42,17 +43,28 @@ export default function Wishlist() {
                   <i class="fas fa-trash"></i>
                 </span>
               </button>
-              <button
-                onClick={() => {
-                  removeFromWishlist(_id, userData, dispatchUserData);
-                  addToCart(product._id, userData, dispatchUserData);
-                }}
-                class="btn btn--icon"
-              >
-                <span className="fa--sm">
-                  <i class="fas fa-cart-plus"></i>
-                </span>
-              </button>
+              {isProductInCart(product._id) ? (
+                <Link className="link" to="/cart">
+                  <button className="btn btn--icon--left text--xs btn--secondary">
+                    <span className="btn__icon fa--xs">
+                      <i className="fas fa-shopping-cart"></i>
+                    </span>
+                    <p className="btn__text">GO TO CART</p>
+                  </button>
+                </Link>
+              ) : (
+                <button
+                  onClick={() =>
+                    addToCart(product._id, userData, dispatchUserData)
+                  }
+                  className="btn btn--icon--left text--xs btn--secondary"
+                >
+                  <span className="btn__icon fa--xs">
+                    <i className="fas fa-shopping-cart"></i>
+                  </span>
+                  <p className="btn__text">ADD TO CART</p>
+                </button>
+              )}
             </div>
           </div>
         ))}
