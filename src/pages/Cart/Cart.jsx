@@ -37,32 +37,43 @@ export default function Cart() {
                 </span>
               </button>
               <div className="cart__quantity">
-                {quantity > 1 && (
-                  <button
-                    onClick={() =>
-                      updateQuantity("DEC", _id, userData, dispatchUserData)
-                    }
-                    className="btn btn--icon"
-                    disabled={quantity <= 0}
-                  >
-                    <span className="fa--sm">
-                      <i className="fas fa-minus-circle"></i>
-                    </span>
-                  </button>
-                )}
+                <button
+                  onClick={
+                    quantity > 1
+                      ? () =>
+                          updateQuantity("DEC", _id, userData, dispatchUserData)
+                      : null
+                  }
+                  className={`btn btn--icon ${
+                    quantity <= 1 ? "btn--disabled" : ""
+                  }`}
+                >
+                  <span className="fa--sm">
+                    {quantity > 0 && <i className="fas fa-minus-circle"></i>}
+                  </span>
+                </button>
                 <span className="text--sm">{quantity}</span>
-                {quantity < product.quantity && (
-                  <button
-                    onClick={() =>
-                      updateQuantity("INC", _id, userData, dispatchUserData)
-                    }
-                    className="btn btn--icon"
-                  >
-                    <span className="fa--sm">
-                      <i className="fas fa-plus-circle"></i>
-                    </span>
-                  </button>
-                )}
+                <button
+                  onClick={
+                    quantity < product.quantity
+                      ? () => {
+                          updateQuantity(
+                            "INC",
+                            _id,
+                            userData,
+                            dispatchUserData
+                          );
+                        }
+                      : null
+                  }
+                  className={`btn btn--icon ${
+                    quantity >= product.quantity ? "btn--disabled" : ""
+                  }`}
+                >
+                  <span className="fa--sm">
+                    <i className="fas fa-plus-circle"></i>
+                  </span>
+                </button>
               </div>
             </div>
           </div>
