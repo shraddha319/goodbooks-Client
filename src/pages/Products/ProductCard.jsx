@@ -1,17 +1,34 @@
 import "./ProductCard.css";
 import { addToCart, addToWishlist } from "../../api/index";
+import { Link } from "react-router-dom";
 
-export default function ProductCard({ product, userData, dispatchUserData }) {
+export default function ProductCard({
+  product,
+  userData,
+  dispatchUserData,
+  isProductInCart,
+  isProductInWishlist,
+}) {
   return (
     <div className="card card--product clickable hover--scale-out">
-      <button
-        className="btn btn--icon"
-        onClick={() => addToWishlist(product._id, userData, dispatchUserData)}
-      >
-        <span className="fa--sm fa--hover fa--primary">
-          <i className="far fa-heart"></i>
-        </span>
-      </button>
+      {isProductInWishlist(product._id) ? (
+        <Link to="/wishlist">
+          <button className="btn btn--icon">
+            <span className="fa--sm fa--hover fa--primary">
+              <i className="fas fa-heart"></i>
+            </span>
+          </button>
+        </Link>
+      ) : (
+        <button
+          className="btn btn--icon"
+          onClick={() => addToWishlist(product._id, userData, dispatchUserData)}
+        >
+          <span className="fa--sm fa--hover fa--primary">
+            <i className="far fa-heart"></i>
+          </span>
+        </button>
+      )}
       <div className="card__header"></div>
       <div className="card__media">
         <img className="card__media--image" src={product.bookCoverURL} />
@@ -22,15 +39,27 @@ export default function ProductCard({ product, userData, dispatchUserData }) {
         <ProductRating rating={product.rating} />
         <ProductPrice price={product.price} />
       </div>
-      <div className="card__footer">
-        <button
-          onClick={() => addToCart(product._id, userData, dispatchUserData)}
-          className="btn btn--icon"
-        >
-          <span className="fa--sm">
-            <i className="fas fa-shopping-cart"></i>
-          </span>
-        </button>
+      <div className="card__footer justify-center">
+        {isProductInCart(product._id) ? (
+          <Link className="link" to="/cart">
+            <button className="btn btn--icon--left text--xs btn--secondary">
+              <span className="btn__icon fa--xs">
+                <i className="fas fa-shopping-cart"></i>
+              </span>
+              <p className="btn__text">GO TO CART</p>
+            </button>
+          </Link>
+        ) : (
+          <button
+            onClick={() => addToCart(product._id, userData, dispatchUserData)}
+            className="btn btn--icon--left text--xs btn--secondary"
+          >
+            <span className="btn__icon fa--xs">
+              <i className="fas fa-shopping-cart"></i>
+            </span>
+            <p className="btn__text">ADD TO CART</p>
+          </button>
+        )}
       </div>
     </div>
   );

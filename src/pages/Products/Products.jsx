@@ -46,7 +46,12 @@ export default function Products() {
     return itemList;
   }
 
-  const { userData, dispatchUserData } = useUserData();
+  const {
+    userData,
+    dispatchUserData,
+    isProductInCart,
+    isProductInWishlist,
+  } = useUserData();
   const [enableLoader, setEnableLoader] = useState(false);
 
   useEffect(() => getProducts(dispatchProducts, setEnableLoader), []);
@@ -61,6 +66,8 @@ export default function Products() {
             product={product}
             userData={userData}
             dispatchUserData={dispatchUserData}
+            isProductInCart={isProductInCart}
+            isProductInWishlist={isProductInWishlist}
           />
         ))}
       </div>
