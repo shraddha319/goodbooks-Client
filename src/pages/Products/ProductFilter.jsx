@@ -1,4 +1,5 @@
 import { useProducts } from "../../contexts/index";
+import { useState } from "react";
 
 export function ProductFilter() {
   const {
@@ -17,6 +18,13 @@ export function ProductFilter() {
       payload,
     });
   }
+
+  const [showFilterDropDown, setShowFilterDropDown] = useState({
+    rating: false,
+    language: false,
+    genre: false,
+  });
+
   return (
     <div className="products__filter">
       <div className="justify-between">
@@ -65,8 +73,28 @@ export function ProductFilter() {
         </select>
       </div>
       <div className="filter__item">
-        <h3 className="text--muted">Rating</h3>
-        <fieldset className="form__field field--set field--checkbox">
+        <div
+          onClick={() =>
+            setShowFilterDropDown({
+              ...showFilterDropDown,
+              rating: !showFilterDropDown.rating,
+            })
+          }
+          className="filter__header clickable justify-between"
+        >
+          <h3 className="text--muted">Rating</h3>
+          <span className="fa--xs">
+            <i
+              class={`fas ${
+                showFilterDropDown.rating ? "fa-caret-up" : "fa-caret-down"
+              }`}
+            ></i>
+          </span>
+        </div>
+        <fieldset
+          className="form__field field--set field--checkbox"
+          style={{ display: showFilterDropDown.rating ? "block" : "none" }}
+        >
           <div className="field--checkbox checkbox--container">
             <input
               type="checkbox"
@@ -114,8 +142,28 @@ export function ProductFilter() {
         </fieldset>
       </div>
       <div className="filter__item">
-        <h3 className="text--muted">Language</h3>
-        <fieldset className="form__field field--set field--checkbox">
+        <div
+          onClick={() =>
+            setShowFilterDropDown({
+              ...showFilterDropDown,
+              language: !showFilterDropDown.language,
+            })
+          }
+          className="filter__header clickable justify-between"
+        >
+          <h3 className="text--muted">Language</h3>
+          <span className="fa--xs">
+            <i
+              class={`fas ${
+                showFilterDropDown.language ? "fa-caret-up" : "fa-caret-down"
+              }`}
+            ></i>
+          </span>
+        </div>
+        <fieldset
+          style={{ display: showFilterDropDown.language ? "block" : "none" }}
+          className="filter__drop-down--show form__field field--set field--checkbox"
+        >
           {multipleCheckFilters.language.map((lang) => (
             <div className="field--checkbox checkbox--container">
               <input
@@ -134,8 +182,28 @@ export function ProductFilter() {
         </fieldset>
       </div>
       <div className="filter__item">
-        <h3 className="text--muted">Genre</h3>
-        <fieldset className="form__field field--set field--checkbox">
+        <div
+          onClick={() =>
+            setShowFilterDropDown({
+              ...showFilterDropDown,
+              genre: !showFilterDropDown.genre,
+            })
+          }
+          className="filter__header clickable justify-between"
+        >
+          <h3 className="text--muted">Genre</h3>
+          <span className="fa--xs">
+            <i
+              class={`fas ${
+                showFilterDropDown.genre ? "fa-caret-up" : "fa-caret-down"
+              }`}
+            ></i>
+          </span>
+        </div>
+        <fieldset
+          style={{ display: showFilterDropDown.genre ? "block" : "none" }}
+          className="form__field field--set field--checkbox"
+        >
           {multipleCheckFilters.genre.map((item) => (
             <div className="field--checkbox checkbox--container">
               <input
