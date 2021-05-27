@@ -17,6 +17,7 @@ export async function updateQuantity(updateType, cartItemId, userData, dispatchU
             type: "UPDATE_QUANTITY",
             payload: {
                 _id: data._id,
+                totalPrice: data.totalPrice,
                 cartItemId,
                 updateType
             }
@@ -48,6 +49,7 @@ export async function removeFromCart(cartItemId, userData, dispatchUserData) {
             type,
             payload: {
                 _id: data._id,
+                totalPrice: data.totalPrice,
                 cartItemId,
             },
         });
@@ -76,6 +78,7 @@ export async function addToCart(productId, userData, dispatchUserData) {
             payload: {
                 cart: {
                     _id: data._id,
+                    totalPrice: data.totalPrice,
                     cartItems: data.cartItems
                 }
             }

@@ -6,6 +6,7 @@ export function UserDataProvider({ children }) {
   const initialUserData = JSON.parse(localStorage.getItem("userData")) || {
     cart: {
       _id: null,
+      totalPrice: 0,
       cartItems: [],
     },
     wishlist: {
@@ -35,12 +36,20 @@ export function UserDataProvider({ children }) {
         let update = payload.updateType === "INC" ? 1 : -1;
         let updatedCartItems = userData.cart.cartItems.map((item) =>
           item._id === payload.cartItemId
-            ? { ...item, quantity: item.quantity + update }
+            ? {
+                ...item,
+                quantity: item.quantity + update,
+                totalPrice: payload.totalPrice,
+              }
             : item
         );
         return {
           ...userData,
-          cart: { ...userData.cart, cartItems: updatedCartItems },
+          cart: {
+            ...userData.cart,
+            cartItems: updatedCartItems,
+            totalPrice: payload.totalPrice,
+          },
         };
 
       case "REMOVE_FROM_CART":
@@ -49,11 +58,18 @@ export function UserDataProvider({ children }) {
         );
         return {
           ...userData,
-          cart: { ...userData.cart, cartItems: newCartItems },
+          cart: {
+            ...userData.cart,
+            totalPrice: payload.totalPrice,
+            cartItems: newCartItems,
+          },
         };
 
       case "REMOVE_CART":
-        return { ...userData, cart: { _id: null, cartItems: [] } };
+        return {
+          ...userData,
+          cart: { _id: null, totalPrice: 0, cartItems: [] },
+        };
 
       case "ADD_TO_WISHLIST":
         return {

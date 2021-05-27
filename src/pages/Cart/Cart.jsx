@@ -8,9 +8,10 @@ import {
   UpdateQuantity,
 } from "../../components/index";
 import { removeFromCart, updateQuantity } from "../../api/index";
+import { CartPrice } from "./CartPrice";
 
 export default function Cart() {
-  const { userData, dispatchUserData } = useUserData();
+  const { userData } = useUserData();
   return !userData.cart._id ? (
     <EmptyCart />
   ) : (
@@ -55,34 +56,7 @@ export default function Cart() {
           </div>
         ))}
       </div>
-      <div class="card cart__pricing">
-        <div class="card__header">
-          <h2 class="title--xs title">PRICE DETAILS</h2>
-        </div>
-        <div class="card__body">
-          <div className="price__item text--sm text justify-between">
-            <p>Price (x items)</p>
-            <p>₹ 123</p>
-          </div>
-          <div className="price__item text--sm text justify-between">
-            <p>Discount</p>
-            <p>₹ 123</p>
-          </div>
-          <div className="price__item text--sm text justify-between">
-            <p>Delivery Charges</p>
-            <p>₹ 123</p>
-          </div>
-        </div>
-        <div class="card__footer">
-          <div className="price__item text--sm price__item--total justify-between">
-            <p>Total Amount</p>
-            <p>₹ 123</p>
-          </div>
-          <p class="text--primary text--xs">
-            <strong>You will save ₹</strong>
-          </p>
-        </div>
-      </div>
+      <CartPrice userData={userData} />
     </div>
   );
 }
