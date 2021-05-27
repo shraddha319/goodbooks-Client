@@ -1,9 +1,22 @@
 import { Link } from "react-router-dom";
+import "./Navbar.css";
 import logoIcon from "/home/shraddha/e-commerce/src/assets/owl.svg";
+import { useUserData } from "../../../contexts/index";
 
-export default function Navbar() {
+export default function Navbar({ theme }) {
+  const {
+    userData: {
+      cart: { cartItems },
+      wishlist: { wishlistItems },
+    },
+  } = useUserData();
   return (
-    <header className="header">
+    <header
+      style={{
+        background: theme === "transparent" ? "rgba(0,0,0,0.3)" : "",
+      }}
+      className="header"
+    >
       <button className="btn" id="header__toggle">
         <span></span>
       </button>
@@ -28,12 +41,18 @@ export default function Navbar() {
         <ul className="list--no-bullets">
           <li className="nav__item">
             <Link className="link" to="/cart">
-              <i className="fa--sm fas fa-shopping-cart"></i>
+              <i className="fas fa--sm fa-shopping-cart"></i>
+              <span class="badge--icon badge__data badge--round badge--notif">
+                {cartItems.length}
+              </span>
             </Link>
           </li>
           <li className="nav__item">
             <Link className="link" to="/wishlist">
               <i className="fas fa--sm fa-heart"></i>
+              <span class="badge--icon badge__data badge--round badge--notif">
+                {wishlistItems.length}
+              </span>
             </Link>
           </li>
           <li className="nav__item">

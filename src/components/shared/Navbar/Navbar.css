@@ -1,0 +1,14 @@
+.nav .fa-shopping-cart,
+.nav .fa-heart {
+    position: relative;
+}
+
+
+.nav .badge--icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+    line-height: 30px;
+    top: -0.8rem;
+    right: -1.2rem;
+}
