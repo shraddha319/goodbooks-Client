@@ -6,11 +6,18 @@ import {
 import {
     useUserData,
     UserDataProvider
-} from "./userData.context"
+} from "./userData.context";
+
+import {
+    useFeedback,
+    FeedbackProvider
+} from "./Feedback.context";
 
 export {
     useProducts,
     ProductsProvider,
     useUserData,
-    UserDataProvider
+    UserDataProvider,
+    useFeedback,
+    FeedbackProvider
 }

@@ -1,21 +1,33 @@
 import axios from "axios";
 
-export async function getProducts(dispatchProducts, setEnableLoader) {
-    setEnableLoader(true);
+export async function getProducts(dispatchProducts, dispatchFeedback) {
+    dispatchFeedback({
+        type: "SHOW_LOADER"
+    })
     try {
-        const response = await axios.get(
+        const {
+            data: {
+                data
+            },
+            status
+        } = await axios.get(
             "https://E-Commerce-backend.sshraddha.repl.co/products"
         );
-        if (response.status === 200)
+        if (status === 200) {
+            localStorage.setItem("productList", JSON.stringify(data));
             dispatchProducts({
                 type: "INIT_PRODUCTS",
                 payload: {
-                    productList: response.data.data
+                    productList: data
                 },
             });
+        }
+
     } catch (error) {
         console.log("Error fetching products ", error.message);
     } finally {
-        setEnableLoader(false);
+        dispatchFeedback({
+            type: "HIDE_LOADER"
+        })
     }
 }

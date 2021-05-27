@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useProducts, useUserData } from "../../contexts/index";
+import { useEffect } from "react";
+import { useProducts, useUserData, useFeedback } from "../../contexts/index";
 import { getProducts } from "../../api/index";
 import { Loader } from "../../components/index";
 import ProductCard from "./ProductCard";
@@ -11,6 +11,7 @@ export default function Products() {
     products: { productList, filters },
     dispatchProducts,
   } = useProducts();
+  const { feedback, dispatchFeedback } = useFeedback();
 
   function applyProductFilters(productList, filters) {
     let itemList = [...productList];
@@ -52,13 +53,14 @@ export default function Products() {
     isProductInCart,
     isProductInWishlist,
   } = useUserData();
-  const [enableLoader, setEnableLoader] = useState(false);
 
-  useEffect(() => getProducts(dispatchProducts, setEnableLoader), []);
+  useEffect(() => {
+    getProducts(dispatchProducts, dispatchFeedback);
+  }, []);
 
   return (
     <div className="Products page-layout">
-      {enableLoader ? <Loader /> : null}
+      {feedback.loader ? <Loader /> : null}
       <ProductFilter />
       <div className="products__list">
         {applyProductFilters(productList, filters).map((product) => (
