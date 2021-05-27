@@ -1,4 +1,12 @@
 import axios from "axios";
+import {
+  addToCart
+} from "./Cart.api";
+
+export async function moveToCart(wishlistItemId, productId, userData, dispatchUserData) {
+  await addToCart(productId, userData, dispatchUserData)
+  await removeFromWishlist(wishlistItemId, userData, dispatchUserData);
+}
 
 export async function removeFromWishlist(
   wishlistItemId,
@@ -7,18 +15,18 @@ export async function removeFromWishlist(
 ) {
   try {
     const [endPointURI, type] =
-      userData && userData.wishlist.wishlistItems.length === 1
-        ? [
-            `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}`,
-            "REMOVE_WISHLIST",
-          ]
-        : [
-            `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}/${wishlistItemId}`,
-            "REMOVE_FROM_WISHLIST",
-          ];
+    userData && userData.wishlist.wishlistItems.length === 1 ? [
+      `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}`,
+      "REMOVE_WISHLIST",
+    ] : [
+      `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}/${wishlistItemId}`,
+      "REMOVE_FROM_WISHLIST",
+    ];
     const {
       status,
-      data: { data },
+      data: {
+        data
+      },
     } = await axios.delete(endPointURI);
     if (status !== 200) throw Error("Delete request failed");
     dispatchUserData({
@@ -36,13 +44,15 @@ export async function removeFromWishlist(
 export async function addToWishlist(productId, userData, dispatchUserData) {
   try {
     const endPointURI =
-      userData && userData.wishlist._id
-        ? `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}`
-        : "https://E-Commerce-backend.sshraddha.repl.co/wishlist/";
+      userData && userData.wishlist._id ?
+      `https://E-Commerce-backend.sshraddha.repl.co/wishlist/${userData.wishlist._id}` :
+      "https://E-Commerce-backend.sshraddha.repl.co/wishlist/";
 
     const {
       status,
-      data: { data },
+      data: {
+        data
+      },
     } = await axios.post(endPointURI, {
       productId,
     });

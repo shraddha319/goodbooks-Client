@@ -10,6 +10,7 @@ import {
 
 import {
     addToWishlist,
+    moveToCart,
     removeFromWishlist
 } from "./Wishlist.api";
 
@@ -19,5 +20,6 @@ export {
     removeFromCart,
     updateQuantity,
     addToWishlist,
+    moveToCart,
     removeFromWishlist
 };
