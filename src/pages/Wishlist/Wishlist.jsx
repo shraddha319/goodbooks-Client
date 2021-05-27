@@ -2,7 +2,7 @@ import "./Wishlist.css";
 import { Link } from "react-router-dom";
 import { useUserData } from "../../contexts/index";
 import { EmptyWishlist } from "../Error/index";
-import { CardRating, CardPrice } from "../../components/index";
+import { CardRating, CardPrice, DeleteItem } from "../../components/index";
 import { removeFromWishlist, addToCart } from "../../api/index";
 
 export default function Wishlist() {
@@ -33,16 +33,7 @@ export default function Wishlist() {
               <CardPrice price={product.price} />
             </div>
             <div class="card__footer flex--row">
-              <button
-                onClick={() =>
-                  removeFromWishlist(_id, userData, dispatchUserData)
-                }
-                class="btn btn--icon"
-              >
-                <span className="fa--sm">
-                  <i class="fas fa-trash"></i>
-                </span>
-              </button>
+              <DeleteItem itemId={_id} deleteHandler={removeFromWishlist} />
               {isProductInCart(product._id) ? (
                 <Link className="link" to="/cart">
                   <button className="btn btn--icon--left text--xs btn--secondary">
@@ -54,15 +45,16 @@ export default function Wishlist() {
                 </Link>
               ) : (
                 <button
-                  onClick={() =>
-                    addToCart(product._id, userData, dispatchUserData)
-                  }
+                  onClick={() => {
+                    removeFromWishlist(_id, userData, dispatchUserData);
+                    addToCart(product._id, userData, dispatchUserData);
+                  }}
                   className="btn btn--icon--left text--xs btn--secondary"
                 >
                   <span className="btn__icon fa--xs">
                     <i className="fas fa-shopping-cart"></i>
                   </span>
-                  <p className="btn__text">ADD TO CART</p>
+                  <p className="btn__text">MOVE TO CART</p>
                 </button>
               )}
             </div>

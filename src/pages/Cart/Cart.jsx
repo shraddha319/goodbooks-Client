@@ -1,7 +1,12 @@
 import "./Cart.css";
 import { useUserData } from "../../contexts/index";
 import { EmptyCart } from "../Error/index";
-import { CardRating, CardPrice } from "../../components/index";
+import {
+  CardRating,
+  CardPrice,
+  DeleteItem,
+  UpdateQuantity,
+} from "../../components/index";
 import { removeFromCart, updateQuantity } from "../../api/index";
 
 export default function Cart() {
@@ -28,52 +33,23 @@ export default function Cart() {
               <CardPrice price={product.price} />
             </div>
             <div className="card__footer flex--row">
-              <button
-                onClick={() => removeFromCart(_id, userData, dispatchUserData)}
-                className="btn btn--icon"
-              >
-                <span className="fa--sm">
-                  <i className="fas fa-trash"></i>
-                </span>
-              </button>
+              <DeleteItem itemId={_id} deleteHandler={removeFromCart} />
               <div className="cart__quantity">
-                <button
-                  onClick={
-                    quantity > 1
-                      ? () =>
-                          updateQuantity("DEC", _id, userData, dispatchUserData)
-                      : null
-                  }
-                  className={`btn btn--icon ${
-                    quantity <= 1 ? "btn--disabled" : ""
-                  }`}
-                >
-                  <span className="fa--sm">
-                    {quantity > 0 && <i className="fas fa-minus-circle"></i>}
-                  </span>
-                </button>
+                <UpdateQuantity
+                  cartItemId={_id}
+                  updateHandler={updateQuantity}
+                  isDisabled={quantity <= 1}
+                  iconClass="fas fa-minus-circle"
+                  updateType="DEC"
+                />
                 <span className="text--sm">{quantity}</span>
-                <button
-                  onClick={
-                    quantity < product.quantity
-                      ? () => {
-                          updateQuantity(
-                            "INC",
-                            _id,
-                            userData,
-                            dispatchUserData
-                          );
-                        }
-                      : null
-                  }
-                  className={`btn btn--icon ${
-                    quantity >= product.quantity ? "btn--disabled" : ""
-                  }`}
-                >
-                  <span className="fa--sm">
-                    <i className="fas fa-plus-circle"></i>
-                  </span>
-                </button>
+                <UpdateQuantity
+                  cartItemId={_id}
+                  updateHandler={updateQuantity}
+                  isDisabled={quantity >= product.quantity}
+                  iconClass="fas fa-plus-circle"
+                  updateType="INC"
+                />
               </div>
             </div>
           </div>

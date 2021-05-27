@@ -4,7 +4,9 @@ import CardPrice from "./shared/CardPrice/CardPrice";
 import CardRating from "./shared/CardRating/CardRating";
 import {
     ButtonWishlist,
-    ButtonCart
+    ButtonCart,
+    DeleteItem,
+    UpdateQuantity
 } from "./Buttons/Buttons"
 
 export {
@@ -13,5 +15,7 @@ export {
     CardPrice,
     CardRating,
     ButtonWishlist,
-    ButtonCart
+    ButtonCart,
+    DeleteItem,
+    UpdateQuantity
 }

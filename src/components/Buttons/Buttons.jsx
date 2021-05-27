@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { addToCart, addToWishlist } from "../../api/index";
 import { useState } from "react";
 import { useUserData } from "../../contexts";
 
@@ -13,13 +12,13 @@ function ButtonLoading() {
   );
 }
 
-export function ButtonWishlist({ productId }) {
+export function ButtonWishlist({ productId, clickHandler }) {
   const [btnState, setBtnState] = useState("default");
   const { userData, dispatchUserData, isProductInWishlist } = useUserData();
 
   async function addToWishlistHandler(productId, userData, dispatchUserData) {
     setBtnState("loading");
-    await addToWishlist(productId, userData, dispatchUserData);
+    await clickHandler(productId, userData, dispatchUserData);
     setBtnState("default");
   }
 
@@ -45,13 +44,13 @@ export function ButtonWishlist({ productId }) {
   );
 }
 
-export function ButtonCart({ productId }) {
+export function ButtonCart({ productId, clickHandler }) {
   const [btnState, setBtnState] = useState("default");
   const { userData, dispatchUserData, isProductInCart } = useUserData();
 
   async function addToCartHandler(productId, userData, dispatchUserData) {
     setBtnState("loading");
-    await addToCart(productId, userData, dispatchUserData);
+    await clickHandler(productId, userData, dispatchUserData);
     setBtnState("default");
   }
 
@@ -73,6 +72,60 @@ export function ButtonCart({ productId }) {
         <i className="fas fa-shopping-cart"></i>
       </span>
       <p className="btn__text">ADD TO CART</p>
+    </button>
+  );
+}
+
+export function DeleteItem({ itemId, deleteHandler }) {
+  const { userData, dispatchUserData } = useUserData();
+  const [btnState, setBtnState] = useState("default");
+
+  async function deleteItemHandler(itemId, userData, dispatchUserData) {
+    setBtnState("loading");
+    await deleteHandler(itemId, userData, dispatchUserData);
+    setBtnState("default");
+  }
+
+  return btnState === "loading" ? (
+    <ButtonLoading />
+  ) : (
+    <button
+      onClick={() => deleteItemHandler(itemId, userData, dispatchUserData)}
+      class="btn btn--icon"
+    >
+      <span className="fa--sm">
+        <i class="fas fa-trash"></i>
+      </span>
+    </button>
+  );
+}
+
+export function UpdateQuantity({
+  cartItemId,
+  updateHandler,
+  isDisabled,
+  iconClass,
+  updateType,
+}) {
+  const { userData, dispatchUserData } = useUserData();
+  const [btnState, setBtnState] = useState("default");
+
+  async function updateItemHandler() {
+    setBtnState("loading");
+    await updateHandler(updateType, cartItemId, userData, dispatchUserData);
+    setBtnState("default");
+  }
+
+  return btnState === "loading" ? (
+    <ButtonLoading />
+  ) : (
+    <button
+      onClick={!isDisabled ? updateItemHandler : null}
+      className={`btn btn--icon ${isDisabled ? "btn--disabled" : ""}`}
+    >
+      <span className="fa--sm">
+        <i className={iconClass}></i>
+      </span>
     </button>
   );
 }
