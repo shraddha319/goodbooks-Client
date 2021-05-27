@@ -4,7 +4,7 @@
 
 .card--wishlist {
     height: 300px;
-    width: 500px;
+    width: 600px;
     grid-template-columns: 37% 63%;
     grid-template-rows: 80% 20%;
     box-shadow: none;
@@ -12,7 +12,7 @@
     overflow: hidden
 }
 
-.wishlist__list .card--horizontal {
+.card--wishlist.card--horizontal {
     grid-template-areas:
         "media body"
         "media footer";
@@ -20,15 +20,16 @@
 
 .wishlist__list .card__media--image {
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
-.wishlist__list .card__body {
+.card--wishlist .card__body {
+    padding: 0 0.5rem;
     justify-content: space-between;
     align-items: flex-start;
 }
 
 
-.wishlist__list .card__footer {
+.card--wishlist .card__footer {
     align-items: center;
 }

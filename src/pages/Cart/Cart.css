@@ -20,7 +20,7 @@
 
 .card--cart .card__media--image {
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .card--cart .card__body {
