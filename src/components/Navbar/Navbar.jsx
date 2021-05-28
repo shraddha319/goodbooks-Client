@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import logoIcon from "/home/shraddha/e-commerce/src/assets/owl.svg";
-import { useUserData } from "../../../contexts/index";
+import logoIcon from "../../assets/owl.svg";
+import { useUserData } from "../../contexts/index";
 
 export default function Navbar({ theme }) {
   const {
