@@ -1,7 +1,8 @@
-import Navbar from "./shared/Navbar/Navbar";
-import Loader from "./shared/Loader/Loader";
-import CardPrice from "./shared/CardPrice/CardPrice";
-import CardRating from "./shared/CardRating/CardRating";
+import Navbar from "./Navbar/Navbar";
+import Loader from "./Loader/Loader";
+import Toast from "./Toast/Toast";
+import CardPrice from "./CardPrice/CardPrice";
+import CardRating from "./CardRating/CardRating";
 import {
     ButtonWishlist,
     ButtonCart,
@@ -11,6 +12,7 @@ import {
 
 export {
     Loader,
+    Toast,
     Navbar,
     CardPrice,
     CardRating,

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useUserData } from "../../contexts";
+import { useUserData, useFeedback } from "../../contexts";
 
 function ButtonLoading() {
   return (
@@ -47,10 +47,11 @@ export function ButtonWishlist({ productId, clickHandler }) {
 export function ButtonCart({ productId, clickHandler }) {
   const [btnState, setBtnState] = useState("default");
   const { userData, dispatchUserData, isProductInCart } = useUserData();
+  const { dispatchFeedback } = useFeedback();
 
   async function addToCartHandler(productId, userData, dispatchUserData) {
     setBtnState("loading");
-    await clickHandler(productId, userData, dispatchUserData);
+    await clickHandler(productId, userData, dispatchUserData, dispatchFeedback);
     setBtnState("default");
   }
 
@@ -79,10 +80,11 @@ export function ButtonCart({ productId, clickHandler }) {
 export function DeleteItem({ itemId, deleteHandler }) {
   const { userData, dispatchUserData } = useUserData();
   const [btnState, setBtnState] = useState("default");
+  const { dispatchFeedback } = useFeedback();
 
   async function deleteItemHandler(itemId, userData, dispatchUserData) {
     setBtnState("loading");
-    await deleteHandler(itemId, userData, dispatchUserData);
+    await deleteHandler(itemId, userData, dispatchUserData, dispatchFeedback);
     setBtnState("default");
   }
 

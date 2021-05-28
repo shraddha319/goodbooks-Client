@@ -6,7 +6,8 @@ export function FeedbackProvider({ children }) {
   const initialFeedback = {
     loader: false,
     toast: {
-      message: "",
+      productId: "",
+      body: "",
       type: "",
       active: false,
     },
@@ -16,13 +17,19 @@ export function FeedbackProvider({ children }) {
     initialFeedback
   );
 
-  function feedbackReducer(feedback, { type }) {
+  function feedbackReducer(feedback, { type, payload }) {
     switch (type) {
       case "SHOW_LOADER":
         return { ...feedback, loader: true };
 
       case "HIDE_LOADER":
         return { ...feedback, loader: false };
+
+      case "TRIGGER_TOAST":
+        return { ...feedback, toast: { active: true, ...payload } };
+
+      case "HIDE_TOAST":
+        return { ...feedback, toast: { active: false } };
 
       default:
         return feedback;

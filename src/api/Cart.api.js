@@ -28,8 +28,13 @@ export async function updateQuantity(updateType, cartItemId, userData, dispatchU
 }
 
 
-export async function removeFromCart(cartItemId, userData, dispatchUserData) {
+export async function removeFromCart(cartItemId, userData, dispatchUserData, dispatchFeedback) {
     try {
+        const {
+            product: {
+                _id
+            }
+        } = userData.cart.cartItems.find(item => item._id === cartItemId);
         const [endPointURI, type] =
         userData && userData.cart.cartItems.length === 1 ? [
             `https://E-Commerce-backend.sshraddha.repl.co/cart/${userData.cart._id}`,
@@ -53,12 +58,21 @@ export async function removeFromCart(cartItemId, userData, dispatchUserData) {
                 cartItemId,
             },
         });
+
+        dispatchFeedback({
+            type: "TRIGGER_TOAST",
+            payload: {
+                productId: _id,
+                type: "warning",
+                body: "PRODUCT_NAME has been removed from cart"
+            }
+        })
     } catch (error) {
         console.log("Delete request failed: ", error);
     }
 }
 
-export async function addToCart(productId, userData, dispatchUserData) {
+export async function addToCart(productId, userData, dispatchUserData, dispatchFeedback) {
     try {
         const endPointURI = userData && userData.cart._id ?
             `https://E-Commerce-backend.sshraddha.repl.co/cart/${userData.cart._id}` :
@@ -83,6 +97,14 @@ export async function addToCart(productId, userData, dispatchUserData) {
                 }
             }
         });
+        dispatchFeedback({
+            type: "TRIGGER_TOAST",
+            payload: {
+                type: "success",
+                productId,
+                body: "PRODUCT_NAME has been added to cart"
+            }
+        })
     } catch (error) {
         console.error("Post request failed: ", error.message);
     }

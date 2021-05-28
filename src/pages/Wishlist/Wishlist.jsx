@@ -1,12 +1,13 @@
 import "./Wishlist.css";
 import { Link } from "react-router-dom";
-import { useUserData } from "../../contexts/index";
+import { useUserData, useFeedback } from "../../contexts/index";
 import { EmptyWishlist } from "../Error/index";
 import { CardRating, CardPrice, DeleteItem } from "../../components/index";
 import { removeFromWishlist, addToCart } from "../../api/index";
 
 export default function Wishlist() {
   const { userData, dispatchUserData, isProductInCart } = useUserData();
+  const { dispatchFeedback } = useFeedback();
 
   return !userData.wishlist._id ? (
     <EmptyWishlist />
@@ -47,7 +48,12 @@ export default function Wishlist() {
                 <button
                   onClick={() => {
                     removeFromWishlist(_id, userData, dispatchUserData);
-                    addToCart(product._id, userData, dispatchUserData);
+                    addToCart(
+                      product._id,
+                      userData,
+                      dispatchUserData,
+                      dispatchFeedback
+                    );
                   }}
                   className="btn btn--icon--left text--xs btn--secondary"
                 >
