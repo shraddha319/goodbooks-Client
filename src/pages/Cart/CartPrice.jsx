@@ -3,9 +3,12 @@ import { useUserData } from "../../contexts/index";
 
 export function CartPrice() {
   const { userData } = useUserData();
-  const totalMRP = userData.cart.cartItems.reduce(
-    (total, cartItem) => total + cartItem.quantity * cartItem.product.price.MRP,
-    0
+  const [totalMRP, totalItems] = userData.cart.cartItems.reduce(
+    ([totalMRP, totalItems], cartItem) => [
+      totalMRP + cartItem.quantity * cartItem.product.price.MRP,
+      totalItems + cartItem.quantity,
+    ],
+    [0, 0]
   );
   const finalAmount = userData.cart.totalPrice;
   const discount = totalMRP - finalAmount;
@@ -17,7 +20,7 @@ export function CartPrice() {
       </div>
       <div class="card__body">
         <div className="price__item text--sm text justify-between">
-          <p>Price (x items)</p>
+          <p>{`Price (${totalItems} item${totalItems > 1 ? "s" : ""})`}</p>
           <p>{`₹ ${totalMRP}`}</p>
         </div>
         <div className="price__item text--sm text justify-between">
