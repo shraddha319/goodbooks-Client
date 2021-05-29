@@ -13,7 +13,7 @@ export default function Navbar({ theme }) {
   return (
     <header
       style={{
-        background: theme === "transparent" ? "rgba(0,0,0,0.3)" : "",
+        background: theme,
       }}
       className="header"
     >
