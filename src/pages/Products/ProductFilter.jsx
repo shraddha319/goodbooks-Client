@@ -222,7 +222,6 @@ export function ProductFilter() {
         </fieldset>
       </div>
       <div className="filter__item">
-        <h3 className="text--muted">Availability</h3>
         <div className="field--checkbox checkbox--container">
           <input
             onChange={() => dispatchProducts({ type: "TOGGLE_INSTOCK_FILTER" })}

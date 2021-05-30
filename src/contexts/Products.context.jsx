@@ -69,6 +69,7 @@ export function ProductsProvider({ children }) {
       "History",
       "Comic",
       "Self-Help",
+      "Test Prep",
     ],
     rating: ["4 ★ & above", "3 ★ & above", "2 ★ & above", "1 ★ & above"],
   };

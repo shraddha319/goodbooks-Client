@@ -16,10 +16,10 @@ export default function Products() {
     let itemList = [...productList];
     switch (filters.sortBy) {
       case "PRICE_LOW_TO_HIGH":
-        itemList.sort((a, b) => a.price.MRP - b.price.MRP);
+        itemList.sort((a, b) => a.price.net - b.price.net);
         break;
       case "PRICE_HIGH_TO_LOW":
-        itemList.sort((a, b) => b.price.MRP - a.price.MRP);
+        itemList.sort((a, b) => b.price.net - a.price.net);
         break;
       case "RATING_HIGH_TO_LOW":
         itemList.sort((a, b) => b.rating.avgRating - a.rating.avgRating);
@@ -39,8 +39,11 @@ export default function Products() {
       );
 
     if (filters.genre.length > 0)
-      itemList = itemList.filter(({ specs: { genre } }) =>
-        filters.genre.includes(genre)
+      itemList = itemList.filter(
+        ({ specs: { genre } }) =>
+          filters.genre.findIndex(
+            (g) => g.toLowerCase() === genre.toLowerCase()
+          ) !== -1
       );
 
     return itemList;
