@@ -30,15 +30,18 @@ export default function Navbar({ theme }) {
       <nav className="nav nav--main">
         <ul className="list--no-bullets">
           <li className="nav__item">
-            <Link className="link" to="/products">
-              Explore
-            </Link>
+            <li className="nav__item">
+              <Link className="link" to="/products">
+                <i class="fas fa--md fa-compass"></i>
+              </Link>
+            </li>
           </li>
         </ul>
       </nav>
 
       <nav className="nav nav--social">
         <ul className="list--no-bullets">
+          <li className="nav__item"></li>
           <li className="nav__item">
             <Link className="link" to="/cart">
               <i className="fas fa--sm fa-shopping-cart"></i>
