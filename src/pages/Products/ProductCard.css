@@ -64,3 +64,7 @@
     top: -1rem;
     right: -1.5rem;
 }
+
+.product__detail .product__detail__1>div {
+    align-items: flex-start;
+}
