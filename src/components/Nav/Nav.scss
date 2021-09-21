@@ -1,0 +1,39 @@
+:root {
+  --height-header: 80px;
+}
+
+.header {
+  z-index: 1;
+  height: auto;
+}
+
+.header {
+  .nav__item {
+    margin: 0.8rem 1rem 0.5rem;
+
+    & > .link {
+      font-weight: 600;
+      & > * {
+        margin-right: 10px;
+      }
+    }
+
+    & > .link.active {
+      color: var(--clr-primary);
+    }
+  }
+}
+
+.nav .fa-shopping-cart,
+.nav .fa-heart {
+  position: relative;
+}
+
+.nav .badge--icon {
+  width: 25px;
+  height: 25px;
+  font-size: 0.6rem;
+  line-height: 25px;
+  top: -0.6rem;
+  right: -1rem;
+}
