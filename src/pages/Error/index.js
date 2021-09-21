@@ -1,7 +1,5 @@
-import EmptyCart from "./Cart.Error";
-import EmptyWishlist from "./Wishlist.Error";
+import EmptyCart from './Cart.Error';
+import EmptyWishlist from './Wishlist.Error';
+import NotFound from './NotFound';
 
-export {
-    EmptyCart,
-    EmptyWishlist
-}
+export { EmptyCart, EmptyWishlist, NotFound };
