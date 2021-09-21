@@ -1,25 +1,30 @@
-import {
-    getProducts
-} from "./Products.api";
+import API from './config';
+
+import { getBooks, getBook } from './books.api';
+
+import { postCart, getCart, updateCart, deleteCart } from './cart.api';
 
 import {
-    addToCart,
-    removeFromCart,
-    updateQuantity
-} from "./Cart.api";
+  postWishlist,
+  getWishlist,
+  updateWishlist,
+  deleteWishlist,
+} from './wishlist.api';
 
-import {
-    addToWishlist,
-    moveToCart,
-    removeFromWishlist
-} from "./Wishlist.api";
+import { loginRequest, signUpRequest } from './auth.api';
 
 export {
-    getProducts,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    addToWishlist,
-    moveToCart,
-    removeFromWishlist
+  API,
+  getBook,
+  getBooks,
+  postCart,
+  getCart,
+  updateCart,
+  deleteCart,
+  postWishlist,
+  getWishlist,
+  updateWishlist,
+  deleteWishlist,
+  loginRequest,
+  signUpRequest,
 };
