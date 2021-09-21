@@ -1,0 +1,50 @@
+.form--signup,
+.form--login,
+.form--edit-profile {
+  font-size: 0.8rem;
+
+  .form__container {
+    width: 480px;
+
+    .form__header {
+      text-align: center;
+    }
+
+    .form {
+      background: white;
+      border: 1px solid var(--clr-gray-light);
+      border-radius: 10px;
+      width: 100%;
+      padding: 1em 2.4em;
+      display: flex;
+      flex-flow: column;
+
+      & > * {
+        margin: 0.5em 0;
+      }
+
+      .form__field {
+        margin: 0.2rem;
+        input {
+          border: 1px solid var(--clr-gray-light);
+        }
+      }
+    }
+
+    .form__footer {
+      background-color: white;
+      padding: 1rem;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+      text-align: center;
+      width: 100%;
+      border: 1px solid var(--clr-gray-light);
+      border-radius: 10px;
+    }
+  }
+
+  .loader {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
