@@ -63,6 +63,7 @@ API source code can be found [here](https://github.com/shraddha319/goodbooks-api
 
 - Filter books by genre, language, availability, rating etc.
 - Sort books by price and rating
+- Toast message on every update to cart and wishlist
 - Protected Routes
 - Redirect to login for unauthenticated users
 - Custom form validation
