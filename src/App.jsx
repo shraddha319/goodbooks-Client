@@ -1,37 +1,52 @@
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Navbar, Loader, Toast } from "./components/index";
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Nav, Loader, Toast, ScrollToTop, PrivateRoute } from './components';
 import {
   Home,
-  Products,
+  Books,
   Cart,
   Wishlist,
-  ProductDetail,
+  BookDetail,
+  NotFound,
   Login,
-} from "./pages/index";
-import { useFeedback } from "./contexts/index";
-import "./App.css";
+  Signup,
+  EditProfile,
+} from './pages';
+import { useAuth, useUser, useToast } from './contexts';
+import './App.css';
 
 export default function App() {
   const location = useLocation();
+  const { auth } = useAuth();
   const {
-    feedback: { loader, toast },
-  } = useFeedback();
+    user: { cart, wishlist },
+  } = useUser();
+  const { toast } = useToast();
 
   return (
     <div className="App">
-      <Navbar theme={location.pathname === "/" ? "transparent" : ""} />
-      <div className="Main">
-        {loader ? <Loader /> : null}
-        {toast.active ? <Toast /> : null}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:productId" element={<ProductDetail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-        </Routes>
-      </div>
+      <Nav pathname={location.pathname} />
+      <ScrollToTop>
+        {auth.status === 'loading' ||
+        cart.status === 'loading' ||
+        wishlist.status === 'loading' ? (
+          <Loader />
+        ) : (
+          <div className="Main">
+            {toast.active ? <Toast /> : null}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/books" element={<Books />} />
+              <Route path="/books/:bookId" element={<BookDetail />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <PrivateRoute path="/cart" element={<Cart />} />
+              <PrivateRoute path="/wishlist" element={<Wishlist />} />
+              <PrivateRoute path="/profile" element={<EditProfile />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        )}
+      </ScrollToTop>
     </div>
   );
 }

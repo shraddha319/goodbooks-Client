@@ -1,24 +1,44 @@
 html {
-    background: #FFF6E5;
+  background: #fff6e5;
 }
-
 
 #root,
 .App {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .Main {
-    height: 100%;
+  height: 100%;
 }
 
 .page-layout {
-    display: grid;
-    grid-template-columns: 350px minmax(1024px, 50%) auto;
-    margin: 110px 2em 0;
+  display: grid;
+  grid-template-columns: 350px minmax(1024px, 50%) auto;
+  margin: 110px 2em 0;
 }
 
-.header {
-    z-index: 1;
+.layout--center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--icon--left {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--icon--left .btn__text {
+  margin-left: 0.4em;
+}
+
+.icon--lg {
+  width: 2.5rem;
+  height: 2.5rem;
 }
