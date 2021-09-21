@@ -1,0 +1,30 @@
+.books__filter {
+  grid-column: 1/2;
+  width: 350px;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: white;
+  border: 1px solid var(--clr-gray-light);
+}
+
+.books__filter .field__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.books__filter .field__input {
+  font-size: 0.8rem;
+}
+
+.books__filter .filter__item {
+  margin: 1rem 1.2rem;
+}
+
+.books__filter .btn--clear-filters {
+  font-size: 0.7rem;
+}
+
+.books__filter .filter__header {
+  align-items: center;
+  color: var(--clr-gray);
+}
