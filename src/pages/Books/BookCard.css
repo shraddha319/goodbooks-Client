@@ -1,0 +1,44 @@
+.card--book {
+  padding: 1rem;
+  min-width: 300px;
+  width: 320px;
+  height: 460px;
+  display: inline-grid;
+  grid-template-rows: 52% 36% 12%;
+  grid-template-areas:
+    'media'
+    'body'
+    'footer';
+  position: relative;
+}
+
+.card--book > * {
+  margin: 0.6rem;
+}
+
+.card--book .btn--heart {
+  position: absolute;
+  top: 0;
+  left: 0.2rem;
+}
+
+.card--book .card__body {
+  justify-content: space-between;
+}
+.card--book .card__body > * {
+  margin: 0.1rem 0;
+}
+
+.card--book .card__media--image {
+  object-fit: contain;
+}
+
+.card--book .card__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.card--book .card__footer .btn--cart {
+  padding: 0;
+}

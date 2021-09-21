@@ -1,67 +1,67 @@
 .cart__list {
-    grid-column: 2/3;
+  grid-column: 2/3;
 }
 
 .card--cart {
-    height: 300px;
-    width: 600px;
-    grid-template-columns: 37% 63%;
-    grid-template-rows: 80% 20%;
-    box-shadow: none;
-    border: 1px solid var(--clr-gray-light);
-    overflow: hidden
+  height: 300px;
+  width: 600px;
+  grid-template-columns: 37% 63%;
+  grid-template-rows: 80% 20%;
+  box-shadow: none;
+  border: 1px solid var(--clr-gray-light);
+  overflow: hidden;
 }
 
 .card--cart.card--horizontal {
-    grid-template-areas:
-        "media body"
-        "media footer";
+  grid-template-areas:
+    'media body'
+    'media footer';
 }
 
 .card--cart .card__media--image {
-    height: 100%;
-    object-fit: contain;
+  height: 100%;
+  object-fit: contain;
 }
 
 .card--cart .card__body {
-    padding: 0 0.5rem;
-    justify-content: space-between;
-    align-items: flex-start;
+  padding: 0 0.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-
 .card__footer {
-    align-items: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__footer .cart__quantity {
+  display: flex;
+  align-items: center;
 }
 
 /* pricing section*/
 
-
 .cart__pricing .card__header {
-    padding: 0.5em;
-    border-bottom: 1px solid var(--clr-gray-light);
+  padding: 0.5em;
+  border-bottom: 1px solid var(--clr-gray-light);
 }
 
 .cart__pricing {
-    padding: 0.2rem;
-    height: 400px;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    grid-column: 3/4;
-    min-height: 400px;
-    box-shadow: none;
-    border: 1px solid var(--clr-gray-light);
+  padding: 0.2rem;
+  height: 450px;
+  grid-column: 3/4;
+  box-shadow: none;
+  border: 1px solid var(--clr-gray-light);
 }
 
 .cart__pricing .price__item {
-    width: 100%;
+  width: 100%;
 }
 
 .cart__pricing .price__item--total {
-    border: 1px solid var(--clr-gray-light);
-    border-width: 1px 0 1px;
-    padding: 0.5rem 0;
-    margin: 0.5rem 0;
-    font-weight: 600;
+  border: 1px solid var(--clr-gray-light);
+  border-width: 1px 0 1px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 0;
+  font-weight: 600;
 }

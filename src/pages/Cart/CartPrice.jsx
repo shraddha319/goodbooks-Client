@@ -1,17 +1,11 @@
-import "./Cart.css";
-import { useUserData } from "../../contexts/index";
+import './Cart.css';
 
-export function CartPrice() {
-  const { userData } = useUserData();
-  const [totalMRP, totalItems] = userData.cart.cartItems.reduce(
-    ([totalMRP, totalItems], cartItem) => [
-      totalMRP + cartItem.quantity * cartItem.product.price.MRP,
-      totalItems + cartItem.quantity,
-    ],
-    [0, 0]
-  );
-  const finalAmount = userData.cart.totalPrice;
-  const discount = totalMRP - finalAmount;
+export default function CartPrice({ cart }) {
+  const totalMRP =
+    Math.round((cart.totalPrice + cart.totalPrice / 10) * 100) / 100;
+  const finalAmount = Math.round(cart.totalPrice * 100) / 100;
+  const discount = Math.round((totalMRP - finalAmount) * 100) / 100;
+  const totalItems = Math.round(cart.books.length * 100) / 100;
 
   return (
     <div class="card cart__pricing">
@@ -20,7 +14,7 @@ export function CartPrice() {
       </div>
       <div class="card__body">
         <div className="price__item text--sm text justify-between">
-          <p>{`Price (${totalItems} item${totalItems > 1 ? "s" : ""})`}</p>
+          <p>{`Price (${totalItems} item${totalItems > 1 ? 's' : ''})`}</p>
           <p>{`₹ ${totalMRP}`}</p>
         </div>
         <div className="price__item text--sm text justify-between">

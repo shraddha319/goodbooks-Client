@@ -1,0 +1,9 @@
+.Books {
+  height: 100%;
+}
+
+.books__list {
+  grid-column: 2/4;
+  display: flex;
+  flex-flow: row wrap;
+}
