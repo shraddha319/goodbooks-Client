@@ -1,23 +1,18 @@
-import {
-    useProducts,
-    ProductsProvider
-} from "./Products.context";
+import { UserProvider, useUser } from './user/context';
 
-import {
-    useUserData,
-    UserDataProvider
-} from "./userData.context";
+import { useToast, ToastProvider } from './toast.context';
 
-import {
-    useFeedback,
-    FeedbackProvider
-} from "./Feedback.context";
+import { useBooks, BooksProvider } from './books/context';
+
+import { AuthProvider, useAuth } from './auth/context';
 
 export {
-    useProducts,
-    ProductsProvider,
-    useUserData,
-    UserDataProvider,
-    useFeedback,
-    FeedbackProvider
-}
+  useUser,
+  UserProvider,
+  useToast,
+  ToastProvider,
+  useBooks,
+  BooksProvider,
+  AuthProvider,
+  useAuth,
+};
