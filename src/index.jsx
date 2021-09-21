@@ -1,24 +1,27 @@
-import { StrictMode } from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import {
-  ProductsProvider,
-  UserDataProvider,
-  FeedbackProvider,
-} from "./contexts/index";
-import App from "./App";
+  UserProvider,
+  ToastProvider,
+  BooksProvider,
+  AuthProvider,
+} from './contexts';
+import App from './App';
 
 ReactDOM.render(
   <StrictMode>
     <Router>
-      <FeedbackProvider>
-        <ProductsProvider>
-          <UserDataProvider>
-            <App />
-          </UserDataProvider>
-        </ProductsProvider>
-      </FeedbackProvider>
+      <ToastProvider>
+        <BooksProvider>
+          <UserProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </UserProvider>
+        </BooksProvider>
+      </ToastProvider>
     </Router>
   </StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
