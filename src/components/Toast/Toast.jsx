@@ -1,51 +1,44 @@
-import { useFeedback, useProducts } from "../../contexts/index";
-import "./Toast.css";
-import { useEffect } from "react";
+import { useToast } from '../../contexts';
+import './Toast.css';
+import { useEffect } from 'react';
 
 export default function Toast() {
-  const { feedback, dispatchFeedback } = useFeedback();
   const {
-    toast: { active, type, productId, body },
-  } = feedback;
-
-  const {
-    products: { productList },
-  } = useProducts();
-  const product = productList.find((product) => product._id === productId);
+    toast: { active, type, body },
+    dispatchToast,
+  } = useToast();
 
   const typeIconMap = {
-    info: "fa-info-circle",
-    warning: "fa-exclamation-triangle",
-    error: "fa-skull-crossbones",
-    success: "fa-check-circle",
+    info: 'fa-info-circle',
+    warning: 'fa-exclamation-triangle',
+    error: 'fa-skull-crossbones',
+    success: 'fa-check-circle',
   };
 
   useEffect(() => {
-    if (feedback.toast.active) {
+    if (active) {
       const timerID = setTimeout(() => {
-        dispatchFeedback({ type: "HIDE_TOAST" });
-      }, 5000);
+        dispatchToast({ type: 'HIDE_TOAST' });
+      }, 3000);
 
       return () => {
         clearTimeout(timerID);
       };
     }
-  }, [feedback]);
+  }, [active, dispatchToast, body]);
 
   return (
     <div
-      class={`toast ${active ? "toast--show" : "toast--hide"}
+      class={`toast ${active ? 'toast--show' : 'toast--hide'}
     toast--${type}`}
     >
       <div class="toast__layout">
         <span class="toast__icon fa--sm">
           <i class={`fas ${typeIconMap[type]}`}></i>
         </span>
-        <span class="toast__text">
-          {body.replace("PRODUCT_NAME", product.name)}
-        </span>
+        <span class="toast__text">{body}</span>
         <button
-          onClick={() => dispatchFeedback({ type: "HIDE_TOAST" })}
+          onClick={() => dispatchToast({ type: 'HIDE_TOAST' })}
           class="toast__close btn"
         >
           <span className="fa--xs">
