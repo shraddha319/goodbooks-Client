@@ -1,6 +1,6 @@
-import "./Home.css";
-import { Link } from "react-router-dom";
-import Typewriter from "typewriter-effect";
+import './Home.css';
+import { Link } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
 
 export default function Home() {
   return (
@@ -11,22 +11,22 @@ export default function Home() {
             <Typewriter
               onInit={(typewriter) => {
                 typewriter
-                  .typeString("Classics")
+                  .typeString('Classics')
                   .pauseFor(1000)
                   .deleteAll()
-                  .typeString("Fiction")
+                  .typeString('Fiction')
                   .pauseFor(1000)
                   .deleteAll()
-                  .typeString("Biographies")
+                  .typeString('Biographies')
                   .pauseFor(1000)
                   .deleteAll()
-                  .typeString("Comics")
+                  .typeString('Comics')
                   .pauseFor(1000)
                   .deleteAll()
-                  .typeString("Self-Help")
+                  .typeString('Self-Help')
                   .pauseFor(1000)
                   .deleteAll()
-                  .typeString("Exam Prep")
+                  .typeString('Exam Prep')
                   .pauseFor(1000)
                   .deleteAll()
                   .start();
@@ -40,7 +40,7 @@ export default function Home() {
             </p>
             <Link
               className="btn btn--md btn--icon--right btn--primary"
-              to="sign-up"
+              to="signup"
             >
               <p class="btn__text">Sign Up</p>
               <span class="btn__icon fa--xs">
