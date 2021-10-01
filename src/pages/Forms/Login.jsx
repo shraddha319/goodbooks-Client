@@ -47,6 +47,14 @@ export default function Login() {
     }
   }
 
+  function testLoginHandler() {
+    const credentials = {
+      email: process.env.REACT_APP_TEST_EMAIL,
+      password: process.env.REACT_APP_TEST_PASSWORD,
+    };
+    loginUser(dispatchAuth, dispatchUser, credentials);
+  }
+
   return (
     <div className="form--login layout--center justify-center">
       <div className="form__container">
@@ -95,6 +103,14 @@ export default function Login() {
           </button>
         </form>
         <div className="form__footer">
+          <p>
+            <button
+              onClick={testLoginHandler}
+              className="btn btn--action btn--sm"
+            >
+              Guest Login
+            </button>
+          </p>
           <p>
             New to goodbooks?{' '}
             <Link to="/signup" className="link link--hover">
