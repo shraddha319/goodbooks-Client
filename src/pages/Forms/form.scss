@@ -29,6 +29,10 @@
           border: 1px solid var(--clr-gray-light);
         }
       }
+
+      .field__error {
+        color: var(--clr-error);
+      }
     }
 
     .form__footer {
