@@ -45,7 +45,7 @@ API source code can be found [here](https://github.com/shraddha319/goodbooks-api
 - User Sign Up
 - User Login
 - Persist logged-in state with localStorage
-- User logout
+- Edit user profile
 
 ### Cart Management
 
@@ -83,7 +83,7 @@ Follwing routes require user authentication:
 
 - `/cart` - user cart
 - `/wishlist` - user wishlist
-- `/profile` - user profile, logout
+- `/profile` - edit user profile, logout
 
 ## Attribution
 
