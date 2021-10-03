@@ -38,7 +38,17 @@ html {
   margin-left: 0.4em;
 }
 
+.icon--md {
+  width: 2rem;
+  height: 2rem;
+}
+
 .icon--lg {
   width: 2.5rem;
   height: 2.5rem;
+}
+
+.link--hover:hover {
+  text-decoration: underline;
+  color: var(--clr-primary);
 }
