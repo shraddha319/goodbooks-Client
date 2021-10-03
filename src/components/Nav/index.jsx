@@ -19,7 +19,8 @@ export default function Nav({ pathname }) {
 
       <div className="header__brand brand">
         <Link className="link" to="/">
-          <LogoIcon className="icon--lg" fill="#fff" />
+          <LogoIcon className="icon--md" fill="#fff" />
+          <p>goodbooks</p>
         </Link>
       </div>
 
