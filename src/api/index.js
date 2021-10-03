@@ -13,6 +13,8 @@ import {
 
 import { loginRequest, signUpRequest } from './auth.api';
 
+import { updateUser } from './user.api';
+
 export {
   API,
   getBook,
@@ -27,4 +29,5 @@ export {
   deleteWishlist,
   loginRequest,
   signUpRequest,
+  updateUser,
 };
