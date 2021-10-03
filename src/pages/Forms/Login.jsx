@@ -2,8 +2,7 @@ import './form.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { loginValidationRules, validate } from '../../validations';
-// import { Loader } from '../../components';
-import { useAuth, useUser } from '../../contexts';
+import { useAuth, useUser, useToast } from '../../contexts';
 
 export default function Login() {
   const [input, setInput] = useState({
@@ -22,6 +21,7 @@ export default function Login() {
     dispatchAuth,
   } = useAuth();
   const { dispatchUser } = useUser();
+  const { dispatchToast } = useToast();
 
   useEffect(() => {
     if (status === 'failed' && !error) {
@@ -30,7 +30,15 @@ export default function Login() {
         password: '',
         login: 'Invalid email/password.',
       });
+      dispatchToast({
+        type: 'TRIGGER_TOAST',
+        payload: { type: 'error', body: 'Login failed!' },
+      });
     } else if (status === 'success') {
+      dispatchToast({
+        type: 'TRIGGER_TOAST',
+        payload: { type: 'success', body: 'Login successful!' },
+      });
       navigate('/books');
     }
   }, [status, navigate]);
@@ -99,7 +107,7 @@ export default function Login() {
             type="submit"
             onClick={loginHandler}
           >
-            {status === 'loading' ? 'loading...' : 'Login'}
+            {status === 'loading' ? 'Loading...' : 'Login'}
           </button>
         </form>
         <div className="form__footer">

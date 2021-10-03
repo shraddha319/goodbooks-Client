@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { signupValidationRules, validate } from '../../validations';
 // import { Loader } from '../../components';
-import { useAuth, useUser } from '../../contexts';
+import { useAuth, useUser, useToast } from '../../contexts';
 
 export default function Signup() {
   const [input, setInput] = useState({
@@ -27,18 +27,28 @@ export default function Signup() {
     signUpUser,
   } = useAuth();
   const { dispatchUser } = useUser();
+  const { dispatchToast } = useToast();
 
   useEffect(() => {
     if (status === 'failed' && error && error.statusCode === 400) {
-      console.log(error);
       setFormError(
         error.errors.reduce((errObj, { message, key, type }) => {
           return { ...errObj, [key]: message };
         }, {})
       );
+      dispatchToast({
+        type: 'TRIGGER_TOAST',
+        payload: { type: 'error', body: 'Sign Up failed!' },
+      });
     }
 
-    if (status === 'success') navigate('/books');
+    if (status === 'success') {
+      navigate('/books');
+      dispatchToast({
+        type: 'TRIGGER_TOAST',
+        payload: { type: 'success', body: 'User registered!' },
+      });
+    }
   }, [status, navigate, error]);
 
   function signupHandler() {
@@ -146,7 +156,7 @@ export default function Signup() {
             type="submit"
             onClick={signupHandler}
           >
-            {status === 'loading' ? 'Loading' : 'Register'}
+            {status === 'loading' ? 'Loading...' : 'Register'}
           </button>
         </form>
         <div className="form__footer">
