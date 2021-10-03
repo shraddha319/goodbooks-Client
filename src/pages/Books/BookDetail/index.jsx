@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useBooks, useUser } from '../../../contexts';
+import { useBooks, useUser, useAuth } from '../../../contexts';
 import './BookDetail.css';
 import {
   CardRating,
@@ -39,6 +39,9 @@ export default function BookDetail() {
     addToCart,
     removeFromCart,
   } = useUser();
+  const {
+    auth: { token },
+  } = useAuth();
 
   const wishlistHandler = async (book) => {
     setLoading({ ...loading, wishlist: true });
@@ -70,7 +73,6 @@ export default function BookDetail() {
           },
           status,
         } = await getBook(bookId);
-        console.log(book);
         if (status === 200) setBook(book);
       } catch (err) {
         console.log(err);
@@ -127,50 +129,74 @@ export default function BookDetail() {
                 <p className="text--muted text--xs">Win Prizes</p>
               </div>
             </div>
-            <button
-              onClick={() => {
-                wishlistHandler(book);
-              }}
-              className="btn btn--icon--left text--xs btn--secondary"
-            >
-              {isBookInWishlist(book._id) ? (
-                <>
-                  <span className="fa--sm">
-                    {loading.wishlist ? <ButtonLoading /> : <HeartSolid />}
-                  </span>
-                  <p className="btn__text">REMOVE</p>
-                </>
-              ) : (
-                <>
-                  <span className="fa--sm">
-                    {loading.wishlist ? <ButtonLoading /> : <HeartOutline />}
-                  </span>
-                  <p className="btn__text">ADD</p>
-                </>
-              )}
-            </button>
-            <button
-              onClick={() => {
-                cartHandler(book);
-              }}
-              className="btn btn--icon--left text--xs btn--secondary"
-            >
-              {isBookInCart(book._id) ? (
-                <>
-                  <span className="fa--sm">
-                    {loading.cart ? <ButtonLoading /> : <CartSolid />}
-                  </span>
-                  <p className="btn__text">REMOVE</p>
-                </>
-              ) : (
-                <>
-                  <span className="fa--sm">
-                    {loading.cart ? <ButtonLoading /> : <CartOutline />}
-                  </span>
-                  <p className="btn__text">ADD</p>
-                </>
-              )}
-            </button>
+            {!token ? (
+              <Link
+                to="/login"
+                className="btn btn--icon--left text--xs btn--secondary"
+              >
+                <span className="fa--sm">
+                  <HeartOutline />
+                </span>
+                <p className="btn__text">ADD</p>
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  wishlistHandler(book);
+                }}
+                className="btn btn--icon--left text--xs btn--secondary"
+              >
+                {isBookInWishlist(book._id) ? (
+                  <>
+                    <span className="fa--sm">
+                      {loading.wishlist ? <ButtonLoading /> : <HeartSolid />}
+                    </span>
+                    <p className="btn__text">REMOVE</p>
+                  </>
+                ) : (
+                  <>
+                    <span className="fa--sm">
+                      {loading.wishlist ? <ButtonLoading /> : <HeartOutline />}
+                    </span>
+                    <p className="btn__text">ADD</p>
+                  </>
+                )}
+              </button>
+            )}
+            {!token ? (
+              <Link
+                to="/login"
+                className="btn btn--icon--left text--xs btn--secondary"
+              >
+                <span className="fa--sm">
+                  <CartOutline />
+                </span>
+                <p className="btn__text">ADD</p>
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  cartHandler(book);
+                }}
+                className="btn btn--icon--left text--xs btn--secondary"
+              >
+                {isBookInCart(book._id) ? (
+                  <>
+                    <span className="fa--sm">
+                      {loading.cart ? <ButtonLoading /> : <CartSolid />}
+                    </span>
+                    <p className="btn__text">REMOVE</p>
+                  </>
+                ) : (
+                  <>
+                    <span className="fa--sm">
+                      {loading.cart ? <ButtonLoading /> : <CartOutline />}
+                    </span>
+                    <p className="btn__text">ADD</p>
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </section>
         <section>

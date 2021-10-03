@@ -8,7 +8,7 @@ import {
   HeartSolid,
 } from '../../assets/icons';
 import { useState } from 'react';
-import { useUser, useToast } from '../../contexts';
+import { useUser, useToast, useAuth } from '../../contexts';
 
 export default function BookCard({ book }) {
   const [loading, setLoading] = useState({
@@ -26,6 +26,9 @@ export default function BookCard({ book }) {
     removeFromCart,
   } = useUser();
   const { dispatchToast } = useToast();
+  const {
+    auth: { token },
+  } = useAuth();
 
   const wishlistHandler = async (book) => {
     let toastMessage = '';
@@ -67,7 +70,13 @@ export default function BookCard({ book }) {
   return (
     <div className="card card--book hover--scale-out">
       <div className="btn--heart">
-        {loading.wishlist ? (
+        {!token ? (
+          <Link to="/login" className="link btn btn--icon">
+            <span className="fa--sm fa--hover fa--primary">
+              <HeartOutline />
+            </span>
+          </Link>
+        ) : loading.wishlist ? (
           <ButtonLoading />
         ) : (
           <button
@@ -96,7 +105,13 @@ export default function BookCard({ book }) {
         <CardPrice price={book.price} />
       </div>
       <div className="card__footer">
-        {loading.cart ? (
+        {!token ? (
+          <Link to="/login" className="link btn btn--icon btn--cart">
+            <span className="fa--md fa--hover fa--primary">
+              <CartOutline />
+            </span>
+          </Link>
+        ) : loading.cart ? (
           <ButtonLoading />
         ) : (
           <button
