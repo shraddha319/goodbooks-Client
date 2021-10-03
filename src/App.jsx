@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { Nav, Loader, Toast, ScrollToTop, PrivateRoute } from './components';
 import {
   Home,
@@ -11,12 +11,11 @@ import {
   Signup,
   EditProfile,
 } from './pages';
-import { useAuth, useUser, useToast } from './contexts';
+import { useUser, useToast } from './contexts';
 import './App.css';
 
 export default function App() {
   const location = useLocation();
-  const { auth } = useAuth();
   const {
     user: { cart, wishlist },
   } = useUser();
@@ -26,9 +25,7 @@ export default function App() {
     <div className="App">
       <Nav pathname={location.pathname} />
       <ScrollToTop>
-        {auth.status === 'loading' ||
-        cart.status === 'loading' ||
-        wishlist.status === 'loading' ? (
+        {cart.status === 'loading' || wishlist.status === 'loading' ? (
           <Loader />
         ) : (
           <div className="Main">
